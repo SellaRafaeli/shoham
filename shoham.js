@@ -17,19 +17,31 @@
 // run next step 
 
 // lib
-startAttempts = function(checkFunc, elemID) {
-	var attemptNumber = 0;
+
+safeAttempt = function(func, elemID) {
+	try { 
+		return func(elemID);
+	} 
+	catch (e) {
+			err("Internal Error: "+e.toString());			
+			return false;
+	}
+}
+
+startAttempts = function(func, elemID) {
+	var attemptNumber = 1;
 	
 	var attemptRunner = setInterval(function() { 
-			
+			log('attempt number '+attemptNumber);
 			attemptNumber++;
-			var res = checkFunc(elemID);
+			var res = safeAttempt(func,elemID);
+
 			if (res == true) {
 	  		clearInterval(attemptRunner);
 	  		succ('success on '+elemID);
 	  		next();
 			}
-
+			
 			if (attemptNumber > 10) {
 				clearInterval(attemptRunner);
 				err('FAIL on '+elemID);
@@ -40,6 +52,12 @@ startAttempts = function(checkFunc, elemID) {
 checkExists = function(elemID) { 
 	log('checking for '+elemID);	
 	return (document.getElementById(elemID) != null)
+}
+
+click = function(elemID) { 
+	log('clicking on '+elemID);
+	document.getElementById('login-button').click();
+	return true;
 }
 
 assert = function(condition, desc) { 
@@ -58,10 +76,7 @@ clear();
 steps = [];
 addStep = function(f,id) { var obj = {func: f, id: id}; steps.push(obj); }
 
-addStep(checkExists,'login-intro');
-
 doStep = function(stepNum) { 
-	log('executing step '+stepNum);
 	var step = steps[stepNum]	
 	startAttempts(step.func, step.id) 
 }
@@ -69,9 +84,16 @@ doStep = function(stepNum) {
 counterSteps = 0;
 //doStep(counterSteps++);
 
-nextStep = function() {
-	log('will now call next step: '+counterSteps);
+next = nextStep = function() {
+	if (counterSteps >= steps.length) { succ('Done.'); return; }	
+	doStep(counterSteps++);
 }
 
-doStep(0);
+//now your actual business steps
+addStep(checkExists,'login-intro');
+addStep(checkExists,'login-button');
+addStep(click,'login-button');
+addStep(checkExists,'helloDiv');
+
+nextStep();
 //startAttempts(exists,'login-intro')
