@@ -1,3 +1,5 @@
+//copyright sella.rafaeli@gmail.com
+
 safeAttempt = function(func, elem) {
 	try { 
 		return func(elem);
@@ -92,14 +94,13 @@ findElem = function(elem) {
 
 setTempBorder = function(elem) {
 	var elem = elem;
-	try { 
-		var oldBorder = elem.style.border;
+	try { 		
 		if (elem) {
+			var oldBorder = elem.style.border;
 			elem.style.border='10px solid red';
 			setTimeout(function(){ if (elem) elem.style.border = oldBorder;}, 500);
 		}
 	} catch (e) {
-		debugger
 		err(e);
 		x = elem; z = oldBorder;
 	}
@@ -108,7 +109,6 @@ getElem = function(elem) {
 	if (elem    instanceof HTMLElement) res = elem; //returns on JQ's $("#id")[0]
 	else if (elem[0] instanceof HTMLElement) res = elem[0]; //returns on JQ's $("#id")
 	else res = findElem(elem);	
-debugger
 	setTempBorder(res);
 	return res;
 }
@@ -135,21 +135,22 @@ next = nextStep = function() {
 //now your actual business steps
 
 log("login, logout")
-// addStep(goToURL,'/#/logout');
-// addStep(checkExists,'#login-intro');
-// addStep(checkExists,'#login-button');
-// addStep(click,'#login-button');
-// addStep(checkExists,'#helloDiv');
-// addStep(checkContainsWith('nadir'),'#helloDiv');
-// addStep(goToURL,'/#/logout');
-// addStep(checkNotExists,'#helloDiv');
-
-// log("fail to login with other user")
-// addStep(checkExists,'#login-intro');
-// addStep(setInputWith('other-username'),'#login-form input:first-of-type')
-// addStep(checkExists,'#login-button');
-// addStep(click,'#login-button');
+addStep(goToURL,'/#/logout');
+addStep(checkExists,'#login-intro');
+addStep(checkExists,'#login-button');
+addStep(click,'#login-button');
+addStep(checkExists,'#helloDiv');
+addStep(checkContainsWith('nadir'),'#helloDiv');
+addStep(goToURL,'/#/logout');
 addStep(checkNotExists,'#helloDiv');
+
+log("fail to login with other user")
+addStep(checkExists,'#login-intro');
+addStep(setInputWith('other-username'),'#login-form input:first-of-type')
+addStep(checkExists,'#login-button');
+addStep(click,'#login-button');
+addStep(checkNotExists,'#helloDiv');
+addStep(checkExists,'#login-button');
 
 //addStep(setInput(),'bla-di-bla')
 
