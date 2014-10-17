@@ -31,8 +31,8 @@ Your steps are added at the bottom of shoham.js:
 
 ```javascript
 log("running shoham...")
-addStep(goToURL,'/#/logout');
-addStep(checkExists,'#login-button');
+addStep(goToURL,'/#/logout'); //clean start
+addStep(checkExists,'#login-button'); 
 addStep(click,'#login-button');
 addStep(checkExists,'#helloDiv');
 
