@@ -64,14 +64,17 @@ goToURL = function(url) {
 	return true;
 }
 
+angularFireEvents = function(elem) {
+	if (typeof angular !== 'undefined') {
+			angular.element(getElem(elem)).triggerHandler('change'); //notify angular of change. Sigh. Angular and its damn semi-walled garden.
+		}	
+}
+
 setInputWith = function(text) {
 	var setInput = function(elem) {
 		getElem(elem).value = text;
-
-		if (angular) {
-			angular.element(getElem(elem)).triggerHandler('change'); //notify angular of change. Sigh. Angular and its damn semi-walled garden.
-		}	
-
+		
+		angularFireEvents(elem);
 		return true;
 	}	
 
@@ -152,7 +155,7 @@ addStep(click,'#login-button');
 addStep(checkNotExists,'#helloDiv');
 addStep(checkExists,'#login-button');
 
-//addStep(setInput(),'bla-di-bla')
-
-nextStep();
+// //addStep(setInput(),'bla-di-bla')
+clear();
+ nextStep();
 //startAttempts(exists,'login-intro')
