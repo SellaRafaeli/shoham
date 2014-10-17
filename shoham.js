@@ -135,6 +135,12 @@ next = nextStep = function() {
 	doStep(counterSteps++);
 }
 
+getJQ = function() { //to be used if you need JQ to help debug or whatever.
+	script = document.createElement('script');
+  script.src = 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js';
+	document.getElementsByTagName('head')[0].appendChild(script);
+}
+
 //now your actual business steps
 
 log("login, logout")
@@ -155,7 +161,9 @@ addStep(click,'#login-button');
 addStep(checkNotExists,'#helloDiv');
 addStep(checkExists,'#login-button');
 
-// //addStep(setInput(),'bla-di-bla')
+//addStep(setInput(),'bla-di-bla')
 clear();
+
+//addStep(setInputWith('lolcat'),'input')
  nextStep();
 //startAttempts(exists,'login-intro')
