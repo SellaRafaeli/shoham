@@ -1,13 +1,13 @@
-shohamjs
+# shohamjs
 ========
 
 ShohamJS is an ultra-light tool for acceptance testing your web-app. You can use it to test FE separately or the entire running app, emulating a real user. 
 
-=== Usage ===
+## Usage
 
 Shoham is completely standalone and has no external dependencies, and currently runs in your browser. You grab shoham.js, add your custom steps, open the console and paste it in. 
 
-=== Configuration ===
+##Configuration 
 
 Shoham is configured by creating 'steps', where each step takes a function and and HTML element, and performs an assertion or operation on that element. 
 
@@ -38,6 +38,6 @@ addStep(checkExists,'#helloDiv');
 nextStep() // initiate running tests
 ```
 
-=== Async ===
+## Async
 
 Shoham performs a step and checks the return value. Due to JS's asynchronous nature, after each step, Shoham allows up to 10 attempts of 500 milliseconds each to check for a successful completion of the operation. Thus performing a 'click' on a button which updates the DOM pending a server response (for example) has up to 5 seconds to successfully complete. 
