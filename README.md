@@ -1,11 +1,12 @@
-# shohamjs
-========
+# ShohamJS - testing for humans
+---
+
 
 ShohamJS is an ultra-light tool for acceptance testing your web-app. You can use it to test FE separately or the entire running app, emulating a real user. 
 
 ## Usage
 
-Shoham is completely standalone and has no external dependencies, and currently runs in your browser. You grab shoham.js, add your custom steps, open the console and paste it in. 
+Shoham is completely standalone and has no external dependencies, and currently runs in your browser. Configure your steps in shoham.js, paste it in browser console, and view the results run live. 
 
 ##Configuration 
 
